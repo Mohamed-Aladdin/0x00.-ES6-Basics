@@ -1,17 +1,16 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-prototype-builtins */
-export default function updateStudentGradeByCity(list, city, newGrades) {
+export default function updateStudentGradeByCity(list, city, newGrade) {
   return list
     .filter((obj) => obj.location === city)
     .map((student) => {
-      newGrades.map((studentGrade) => {
+      newGrade.map((studentGrade) => {
         if (studentGrade.studentId === student.id) {
-          // eslint-disable-next-line no-param-reassign
           student.grade = studentGrade.grade;
         }
 
-        if (!student.hasOwnProperty("grade")) {
-          student.grade = "N/A";
+        if (!student.hasOwnProperty('grade')) {
+          student.grade = 'N/A';
         }
         return student;
       });
