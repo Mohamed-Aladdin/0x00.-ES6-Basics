@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-prototype-builtins */
-export default function updateStudentGradeByCity(arr, city, newGrades) {
-  return arr
+export default function updateStudentGradeByCity(list, city, newGrades) {
+  return list
     .filter((obj) => obj.location === city)
     .map((student) => {
       newGrades.map((studentGrade) => {
