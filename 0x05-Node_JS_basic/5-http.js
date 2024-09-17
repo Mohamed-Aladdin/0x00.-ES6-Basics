@@ -15,7 +15,7 @@ function countStudents(path) {
 
       lines.forEach((line) => {
         if (line.trim()) {
-          totalStudents++;
+          totalStudents += 1;
           const [firstname, , , field] = line.split(',');
 
           if (!studentsByField[field]) {
