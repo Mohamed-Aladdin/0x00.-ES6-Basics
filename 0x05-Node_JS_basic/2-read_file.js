@@ -19,7 +19,6 @@ function countStudents(path) {
 
     for (const field in studentsByField) {
       if (Object.prototype.hasOwnProperty.call(studentsByField, field)) {
-        // eslint-disable-line
         console.log(
           `Number of students in ${field}: ${
             studentsByField[field].length
