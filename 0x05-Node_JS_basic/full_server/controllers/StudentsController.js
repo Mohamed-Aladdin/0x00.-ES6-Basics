@@ -38,7 +38,7 @@ class StudentsController {
 
   static getAllStudentsByMajor(request, response) {
     const path = process.argv.length > 2 ? process.argv[2] : '';
-    const major = request.params;
+    const { major } = request.params;
 
     if (!VALID_MAJORS.includes(major)) {
       response.status(500).send('Major parameter must be CS or SWE');
