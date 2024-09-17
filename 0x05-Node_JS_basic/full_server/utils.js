@@ -1,32 +1,39 @@
-import fs from 'fs';
+const fs = require('fs').promises;
 
-export default function readDatabase(path) {
+export default function countStudents(path) {
   return fs
     .readFile(path, 'utf-8')
     .then((data) => {
       const lines = data.trim().toString().split('\n');
       lines.shift();
       const studentsByField = {};
+      let totalStudents = 0;
 
       lines.forEach((line) => {
-        const [firstName, lastName, age, field] = line.split(',');
+        if (line.trim()) {
+          totalStudents += 1;
+          const [firstname, , , field] = line.split(',');
 
-        if (!studentsByField[field]) {
-          studentsByField[field] = [];
+          if (!studentsByField[field]) {
+            studentsByField[field] = [];
+          }
+          studentsByField[field].push(firstname);
         }
-        studentsByField[field].push(firstName);
       });
-      console.log(`Number of students: ${lines.length}`);
+
+      let output = `Number of students: ${totalStudents}\n`;
 
       for (const field in studentsByField) {
-        console.log(
-          `Number of students in ${field}: ${
+        if (Object.prototype.hasOwnProperty.call(studentsByField, field)) {
+          output += `Number of students in ${field}: ${
             studentsByField[field].length
-          }. List: ${studentsByField[field].join(', ')}`
-        );
+          }. List: ${studentsByField[field].join(', ')}\n`;
+        }
       }
+
+      return output.trim();
     })
-    .catch((error) => {
+    .catch(() => {
       throw new Error('Cannot load the database');
     });
 }
