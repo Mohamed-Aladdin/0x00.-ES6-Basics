@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-export default function countStudents(path) {
+function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf-8').trim();
     const lines = data.toString().split('\n');
@@ -28,3 +28,5 @@ export default function countStudents(path) {
     throw new Error('Cannot load the database');
   }
 }
+
+module.exports = countStudents;

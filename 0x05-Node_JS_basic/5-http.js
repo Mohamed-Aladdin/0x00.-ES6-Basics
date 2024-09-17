@@ -1,5 +1,5 @@
 const http = require('http');
-import { countStudents } from './3-read_file_async';
+const countStudents = require('./3-read_file_async');
 
 const HOST = '127.0.0.1';
 const PORT = 1245;
