@@ -7,24 +7,24 @@ function countStudents(path) {
     lines.shift();
     const studentsByField = {};
 
-    if (lines) {
-      lines.forEach((line) => {
-        const [firstname, , , field] = line.split(',');
+    lines.forEach((line) => {
+      const [firstname, , , field] = line.split(',');
 
-        if (!studentsByField[field]) {
-          studentsByField[field] = [];
-        }
-        studentsByField[field].push(firstname);
-      });
-      console.log(`Number of students: ${lines.length}`);
-    }
+      if (!studentsByField[field]) {
+        studentsByField[field] = [];
+      }
+      studentsByField[field].push(firstname);
+    });
+    console.log(`Number of students: ${lines.length}`);
 
     for (const field in studentsByField) {
-      console.log(
-        `Number of students in ${field}: ${
-          studentsByField[field].length
-        }. List: ${studentsByField[field].join(', ')}`
-      );
+      if (Object.prototype.hasOwnProperty.call(studentsByField, field)) {
+        console.log(
+          `Number of students in ${field}: ${
+            studentsByField[field].length
+          }. List: ${studentsByField[field].join(', ')}`
+        );
+      }
     }
   } catch (error) {
     throw new Error('Cannot load the database');
