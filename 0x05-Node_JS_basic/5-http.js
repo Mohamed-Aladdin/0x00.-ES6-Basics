@@ -8,11 +8,11 @@ const app = http.createServer((req, res) => {
   res.statusCode(200);
   res.setHeader('Content-Type', 'text/plain');
 
-  if (req.url == '/') {
+  if (req.url === '/') {
     res.write('Hello Holberton School!');
     res.end();
   }
-  if (req.url == '/students') {
+  if (req.url === '/students') {
     res.write('This is the list of our students\n');
     countStudents(process.argv[2].toString())
       .then((op) => {
