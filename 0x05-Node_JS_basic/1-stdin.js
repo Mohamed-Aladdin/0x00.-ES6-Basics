@@ -4,7 +4,7 @@ process.stdin.on('data', (data) => {
   const name = data.toString().trim();
 
   if (name) {
-    process.stdout.write(`Your name is: ${chunk}`);
+    process.stdout.write(`Your name is: ${name}`);
   }
 });
 
