@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 
-export default function countStudents(path) {
+export default function readDatabase(path) {
   return fs
     .readFile(path, 'utf-8')
     .then((data) => {
@@ -21,17 +21,7 @@ export default function countStudents(path) {
         }
       });
 
-      let output = `Number of students: ${totalStudents}\n`;
-
-      for (const field in studentsByField) {
-        if (Object.prototype.hasOwnProperty.call(studentsByField, field)) {
-          output += `Number of students in ${field}: ${
-            studentsByField[field].length
-          }. List: ${studentsByField[field].join(', ')}\n`;
-        }
-      }
-
-      return output.trim();
+      return studentsByField;
     })
     .catch(() => {
       throw new Error('Cannot load the database');
