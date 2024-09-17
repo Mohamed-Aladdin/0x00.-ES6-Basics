@@ -8,7 +8,7 @@ class StudentsController {
 
     readDatabase(path)
       .then((students) => {
-        res = ['This is the list of our students'];
+        const res = ['This is the list of our students'];
 
         const compare = (a, b) => {
           if (a[0].toLowerCase() < b[0].toLowerCase()) {
@@ -26,7 +26,7 @@ class StudentsController {
               `Number of students in ${field}: ${group.length}.`,
               'List:',
               group.map((student) => student.firstname).join(', '),
-            ].join(' ')
+            ].join(' '),
           );
         }
         response.status(200).send(res.join('\n'));
