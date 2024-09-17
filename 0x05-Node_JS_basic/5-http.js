@@ -11,15 +11,20 @@ function countStudents(path) {
       const lines = data.trim().toString().split('\n');
       lines.shift();
       const studentsByField = {};
+      let totalStudents = 0;
 
       lines.forEach((line) => {
-        const [firstname, , , field] = line.split(',');
+        if (line.trim()) {
+          totalStudents++;
+          const [firstname, , , field] = line.split(',');
 
-        if (!studentsByField[field]) {
-          studentsByField[field] = [];
+          if (!studentsByField[field]) {
+            studentsByField[field] = [];
+          }
+          studentsByField[field].push(firstname);
         }
-        studentsByField[field].push(firstname);
       });
+
       let output = `Number of students: ${totalStudents}\n`;
 
       for (const field in studentsByField) {
@@ -29,6 +34,7 @@ function countStudents(path) {
           }. List: ${studentsByField[field].join(', ')}\n`;
         }
       }
+
       return output.trim();
     })
     .catch(() => {
