@@ -10,25 +10,23 @@ class StudentsController {
       .then((students) => {
         const res = ['This is the list of our students'];
 
-        const compare = (a, b) => {
-          if (a[0].toLowerCase() < b[0].toLowerCase()) {
-            return -1;
-          }
-          if (a[0].toLowerCase() > b[0].toLowerCase()) {
-            return 1;
-          }
-          return 0;
-        };
+        let totalStudents = 0;
+        const studentFields = Object.entries(students).sort(
+          ([fieldA], [fieldB]) => fieldA.localeCompare(fieldB)
+        );
 
-        for (const [field, group] of Object.entries(students).sort(compare)) {
+        studentFields.forEach(([field, group]) => {
+          totalStudents += group.length;
           res.push(
             [
               `Number of students in ${field}: ${group.length}.`,
               'List:',
-              group.map((student) => student.firstname).join(', '),
-            ].join(' '),
+              group.join(', '),
+            ].join(' ')
           );
-        }
+        });
+
+        res.unshift(`Number of students: ${totalStudents}`);
         response.status(200).send(res.join('\n'));
       })
       .catch((error) => {
@@ -52,9 +50,7 @@ class StudentsController {
 
         if (Object.keys(students).includes(major)) {
           const group = students[major];
-          res = `List: ${group
-            .map((student) => student.firstname)
-            .join(', ')}`;
+          res = `List: ${group.map((student) => student.firstname).join(', ')}`;
         }
         response.status(200).send(res);
       })
