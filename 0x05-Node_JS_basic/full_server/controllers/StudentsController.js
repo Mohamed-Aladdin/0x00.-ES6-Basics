@@ -12,7 +12,7 @@ class StudentsController {
 
         let totalStudents = 0;
         const studentFields = Object.entries(students).sort(
-          ([fieldA], [fieldB]) => fieldA.localeCompare(fieldB)
+          ([fieldA], [fieldB]) => fieldA.localeCompare(fieldB),
         );
 
         studentFields.forEach(([field, group]) => {
@@ -22,7 +22,7 @@ class StudentsController {
               `Number of students in ${field}: ${group.length}.`,
               'List:',
               group.join(', '),
-            ].join(' ')
+            ].join(' '),
           );
         });
 
