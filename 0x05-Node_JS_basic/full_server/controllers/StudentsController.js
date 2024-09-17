@@ -48,9 +48,9 @@ class StudentsController {
       .then((students) => {
         let res = '';
 
-        if (Object.keys(students).includes(major)) {
+        if (students[major]) {
           const group = students[major];
-          res = `List: ${group.map((student) => student.firstname).join(', ')}`;
+          res = `List: ${group.join(', ')}`;
         }
         response.status(200).send(res);
       })
