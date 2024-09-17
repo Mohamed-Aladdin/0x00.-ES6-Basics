@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function countStudents (path) {
+function countStudents(path) {
   try {
     const data = fs.readFileSync(path, 'utf-8').trim();
     const lines = data.toString().split('\n');
@@ -8,12 +8,12 @@ function countStudents (path) {
     const studentsByField = {};
 
     lines.forEach((line) => {
-      const [firstName, field] = line.split(',')[0];
+      const [firstname, , , field] = line.split(',');
 
       if (!studentsByField[field]) {
         studentsByField[field] = [];
       }
-      studentsByField[field].push(firstName);
+      studentsByField[field].push(firstname);
     });
     console.log(`Number of students: ${lines.length}`);
 
