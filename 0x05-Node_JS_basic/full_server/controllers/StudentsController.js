@@ -54,7 +54,7 @@ class StudentsController {
           const group = students[major];
           res = `List: ${group.map((student) => student.firstname).join(', ')}`;
         }
-        response.status(200).send(responseText);
+        response.status(200).send(res);
       })
       .catch((error) => {
         response
