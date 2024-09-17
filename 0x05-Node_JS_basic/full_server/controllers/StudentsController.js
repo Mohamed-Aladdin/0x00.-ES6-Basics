@@ -48,15 +48,15 @@ class StudentsController {
     }
     readDatabase(path)
       .then((students) => {
-        const resp = '';
+        let res = '';
 
         if (Object.keys(students).includes(major)) {
           const group = students[major];
-          resp = `List: ${group
+          res = `List: ${group
             .map((student) => student.firstname)
             .join(', ')}`;
         }
-        response.status(200).send(resp);
+        response.status(200).send(res);
       })
       .catch((error) => {
         response
