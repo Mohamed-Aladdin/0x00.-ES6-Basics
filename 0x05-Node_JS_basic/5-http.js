@@ -1,44 +1,40 @@
 const http = require('http');
+const fs = require('fs').promises;
 
 const HOST = '127.0.0.1';
 const PORT = 1245;
 
 function countStudents(path) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(path, 'utf-8', (err, data) => {
-      if (err) {
-        reject(new Error('Cannot load the database'));
-        return;
-      }
-
-      const lines = data.trim().split('\n');
-      lines.shift(); // Remove the header
+  return fs
+    .readFile(path, 'utf-8')
+    .then((data) => {
+      const lines = data.trim().toString().split('\n');
+      lines.shift();
       const studentsByField = {};
 
       lines.forEach((line) => {
-        if (line) {
-          const [firstname, , , field] = line.split(',');
-          if (!studentsByField[field]) {
-            studentsByField[field] = [];
-          }
-          studentsByField[field].push(firstname);
-        }
-      });
+        const [firstname, , , field] = line.split(',');
 
-      const totalStudents = lines.length;
-      let output = `Number of students: ${totalStudents}\n`;
+        if (!studentsByField[field]) {
+          studentsByField[field] = [];
+        }
+        studentsByField[field].push(firstname);
+      });
+      console.log(`Number of students: ${lines.length}`);
 
       for (const field in studentsByField) {
         if (Object.prototype.hasOwnProperty.call(studentsByField, field)) {
-          output += `Number of students in ${field}: ${
-            studentsByField[field].length
-          }. List: ${studentsByField[field].join(', ')}\n`;
+          console.log(
+            `Number of students in ${field}: ${
+              studentsByField[field].length
+            }. List: ${studentsByField[field].join(', ')}`
+          );
         }
       }
-
-      resolve(output.trim());
+    })
+    .catch(() => {
+      throw new Error('Cannot load the database');
     });
-  });
 }
 
 const app = http.createServer((req, res) => {
