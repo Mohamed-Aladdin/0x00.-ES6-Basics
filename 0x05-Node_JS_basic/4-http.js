@@ -1,14 +1,15 @@
 const http = require('http');
 
-const host = '127.0.0.1';
-const port = 1245;
+const HOST = '127.0.0.1';
+const PORT = 1245;
 
 const app = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
+  res.setHeader('Content-Length', responseText.length);
   res.end('Hello Holberton School!');
 });
 
-app.listen(port, host, () => {});
+app.listen(PORT, HOST, () => {});
 
 module.exports = app;
