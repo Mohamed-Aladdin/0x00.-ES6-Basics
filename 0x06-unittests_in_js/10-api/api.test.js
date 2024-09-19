@@ -54,7 +54,7 @@ describe('API Integration Test', () => {
 
   it('POST /login', (done) => {
     request.post(
-      `${URL}`,
+      `${URL}/login`,
       { json: { userName: 'Pinkbrook' } },
       (err, res, body) => {
         expect(err).to.be.null;
