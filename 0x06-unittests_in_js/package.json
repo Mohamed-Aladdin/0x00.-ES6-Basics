@@ -11,6 +11,6 @@
   "dependencies": {
     "chai": "^4.3.7",
     "mocha": "^10.7.3",
-    "sinon": "^19.0.2"
+    "sinon": "^7.5.0"
   }
 }
