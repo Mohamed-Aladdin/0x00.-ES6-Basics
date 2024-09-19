@@ -5,7 +5,8 @@ describe('API Integration Test', () => {
   const URL = 'http://localhost:7865';
 
   it('GET /', (done) => {
-    request.get(URL, (res, body) => {
+    request.get(URL, (err, res, body) => {
+      expect(err).to.be.null;
       expect(res.statusCode).to.be.equal(200);
       expect(body).to.be.equal('Welcome to the payment system');
       done();
@@ -13,7 +14,8 @@ describe('API Integration Test', () => {
   });
 
   it('GET /cart/:id when it is a valid positive number', (done) => {
-    request.get(`${URL}/cart/1`, (res, body) => {
+    request.get(`${URL}/cart/1`, (err, res, body) => {
+      expect(err).to.be.null;
       expect(res.statusCode).to.be.equal(200);
       expect(body).to.be.equal('Payment methods for cart 1');
       done();
@@ -21,21 +23,24 @@ describe('API Integration Test', () => {
   });
 
   it('GET /cart/:id when it is a negative number', (done) => {
-    request.get(`${URL}/cart/-1`, (res, _body) => {
+    request.get(`${URL}/cart/-1`, (err, res, _body) => {
+      expect(err).to.be.null;
       expect(res.statusCode).to.be.equal(404);
       done();
     });
   });
 
   it('GET /cart/:id when it is NaN', (done) => {
-    request.get(`${URL}/cart/abc`, (res, _body) => {
+    request.get(`${URL}/cart/abc`, (err, res, _body) => {
+      expect(err).to.be.null;
       expect(res.statusCode).to.be.equal(404);
       done();
     });
   });
 
   it('GET /available_payments', (done) => {
-    request.get(`${URL}/available_payments`, (res, body) => {
+    request.get(`${URL}/available_payments`, (err, res, body) => {
+      expect(err).to.be.null;
       expect(res.statusCode).to.be.equal(200);
       expect(body).to.be.equal({
         payment_methods: {
@@ -48,10 +53,15 @@ describe('API Integration Test', () => {
   });
 
   it('POST /login', (done) => {
-    request.post(`${URL}`, { json: { userName: 'Pinkbrook' } }, (res, body) => {
-      expect(res.statusCode).to.be.equal(200);
-      expect(body).to.be.equal('Welcome Pinkbrook');
-      done();
-    });
+    request.post(
+      `${URL}`,
+      { json: { userName: 'Pinkbrook' } },
+      (err, res, body) => {
+        expect(err).to.be.null;
+        expect(res.statusCode).to.be.equal(200);
+        expect(body).to.be.equal('Welcome Pinkbrook');
+        done();
+      }
+    );
   });
 });
