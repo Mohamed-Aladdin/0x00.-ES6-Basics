@@ -3,6 +3,8 @@ const express = require('express');
 const PORT = 7865;
 const app = express();
 
+app.use(express.json());
+
 app.get('/', (_req, res) => {
   res.status(200).send('Welcome to the payment system');
 });
