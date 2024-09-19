@@ -11,7 +11,7 @@ const Utils = {
         return Math.round(b) === 0 ? 'Error' : Math.round(a) / Math.round(b);
         break;
       default:
-        return 'Please enter a valid operation!';
+        return 0;
     }
   },
 };

@@ -2,7 +2,6 @@ const sinon = require('sinon');
 const Utils = require('./utils');
 const { expect } = require('chai');
 const sendPaymentRequestToApi = require('./3-payment');
-const { describe, it } = require('mocha');
 
 describe('sendPaymentRequestToApi', () => {
   it('sendPaymentRequestToApi by using calculateNumber method', () => {
